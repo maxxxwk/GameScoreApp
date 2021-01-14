@@ -2,10 +2,12 @@ package com.maxxxwk.gamescoreapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import com.maxxxwk.gamescoreapp.callbacks.ConfirmCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityMainBinding
+import com.maxxxwk.gamescoreapp.fragments.dialogs.MessageDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,20 +21,51 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.etFirstTeamName.setOnFocusChangeListener { v, hasFocus ->
-            checkIsNameFieldEmpty(v as EditText, hasFocus)
+            showWarningIfNameFieldEmpty(v as EditText, hasFocus)
         }
         binding.etSecondTeamName.setOnFocusChangeListener { v, hasFocus ->
-            checkIsNameFieldEmpty(v as EditText, hasFocus)
+            showWarningIfNameFieldEmpty(v as EditText, hasFocus)
         }
         binding.etMinutes.setOnFocusChangeListener { v, hasFocus ->
-            checkIsTimeFieldEmpty(v as EditText, hasFocus)
+            setDefaultValueIfTimeFieldEmpty(v as EditText, hasFocus)
         }
         binding.etSeconds.setOnFocusChangeListener { v, hasFocus ->
-            checkIsTimeFieldEmpty(v as EditText, hasFocus)
+            setDefaultValueIfTimeFieldEmpty(v as EditText, hasFocus)
+        }
+        binding.btnConfirm.setOnClickListener {
+            if (hasEmptyField()) {
+                val title = getString(R.string.empty_field_error_title)
+                val message = getString(R.string.empty_field_error_message)
+                val callback = object : ConfirmCallback {
+                    override fun onConfirm() {
+                        getFirstEmptyField()?.requestFocus()
+                    }
+                }
+                showMessageDialog(title, message, callback)
+            }
         }
     }
 
-    private fun checkIsNameFieldEmpty(editText: EditText, hasFocus: Boolean) {
+    private fun hasEmptyField(): Boolean {
+        if (binding.etFirstTeamName.text.isEmpty() ||
+            binding.etSecondTeamName.text.isEmpty() ||
+            binding.etMinutes.text.isEmpty() ||
+            binding.etSeconds.text.isEmpty()
+        ) {
+            return true
+        }
+        return false
+    }
+
+    private fun getFirstEmptyField() = when {
+        binding.etFirstTeamName.text.isEmpty() -> binding.etFirstTeamName
+        binding.etSecondTeamName.text.isEmpty() -> binding.etSecondTeamName
+        binding.etMinutes.text.isEmpty() -> binding.etMinutes
+        binding.etSeconds.text.isEmpty() -> binding.etSeconds
+        else -> null
+    }
+
+    private fun showWarningIfNameFieldEmpty(editText: EditText, hasFocus: Boolean) {
         if (editText.text.isEmpty() && !hasFocus) {
             val warningMessage = when (editText.id) {
                 R.id.etFirstTeamName -> getString(R.string.first_team_name_field_empty_warning)
@@ -43,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkIsTimeFieldEmpty(editText: EditText, hasFocus: Boolean) {
+    private fun setDefaultValueIfTimeFieldEmpty(editText: EditText, hasFocus: Boolean) {
         if (editText.text.isEmpty() && !hasFocus) {
             editText.setText("0")
         }
@@ -53,5 +86,11 @@ class MainActivity : AppCompatActivity() {
         message?.let {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun showMessageDialog(title: String, message: String, callback: ConfirmCallback) {
+        supportFragmentManager.beginTransaction()
+            .add(MessageDialog.newInstance(title, message, callback), "TAG")
+            .commitAllowingStateLoss()
     }
 }

@@ -9,4 +9,6 @@
     <string name="seconds_field_hint">Seconds</string>
     <string name="first_team_name_field_empty_warning">You should enter name of first team!</string>
     <string name="second_team_name_field_empty_warning">You should enter name of second team!</string>
+    <string name="empty_field_error_title">Incorrect input</string>
+    <string name="empty_field_error_message">You should fill all fields!</string>
 </resources>
