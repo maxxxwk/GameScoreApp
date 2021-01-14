@@ -5,21 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.maxxxwk.gamescoreapp.callbacks.ConfirmCallback
+import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.MessageDialogFragmentBinding
 
 class MessageDialog : DialogFragment() {
     private lateinit var binding: MessageDialogFragmentBinding
-    private lateinit var confirmCallback: ConfirmCallback
+    private lateinit var messageDialogCallback: MessageDialogCallback
     private lateinit var title: String
     private lateinit var message: String
 
     companion object {
-        fun newInstance(title: String, message: String, callback: ConfirmCallback): MessageDialog {
+        fun newInstance(title: String, message: String, callback: MessageDialogCallback): MessageDialog {
             val instance = MessageDialog()
             instance.title = title
             instance.message = message
-            instance.confirmCallback = callback
+            instance.messageDialogCallback = callback
             return instance
         }
     }
@@ -37,7 +37,7 @@ class MessageDialog : DialogFragment() {
 
     private fun setupListeners() {
         binding.btnConfirm.setOnClickListener {
-            confirmCallback.onConfirm()
+            messageDialogCallback.onConfirm()
             dismiss()
         }
     }

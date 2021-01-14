@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
 import com.maxxxwk.gamescoreapp.R
-import com.maxxxwk.gamescoreapp.callbacks.ConfirmCallback
+import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityMainBinding
 import com.maxxxwk.gamescoreapp.fragments.dialogs.MessageDialog
 
@@ -36,14 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnConfirm.setOnClickListener {
             if (hasEmptyField()) {
-                val title = getString(R.string.empty_field_error_title)
-                val message = getString(R.string.empty_field_error_message)
-                val callback = object : ConfirmCallback {
-                    override fun onConfirm() {
-                        getFirstEmptyField()?.requestFocus()
-                    }
-                }
-                showMessageDialog(title, message, callback)
+                showEmptyFieldErrorMessageDialog()
             } else {
                 startScoreActivity()
             }
@@ -106,11 +99,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showMessageDialog(title: String, message: String, callback: ConfirmCallback) {
+    private fun showEmptyFieldErrorMessageDialog() {
+        val title = getString(R.string.empty_field_error_dialog_title)
+        val message = getString(R.string.empty_field_error_dialog_message)
+        val callback = object : MessageDialogCallback {
+            override fun onConfirm() {
+                getFirstEmptyField()?.requestFocus()
+            }
+        }
         supportFragmentManager.beginTransaction()
             .add(MessageDialog.newInstance(title, message, callback), "TAG")
             .commitAllowingStateLoss()
     }
+
     private fun startScoreActivity() {
         val firstTeamName = binding.etFirstTeamName.text.toString()
         val secondTeamName = binding.etSecondTeamName.text.toString()

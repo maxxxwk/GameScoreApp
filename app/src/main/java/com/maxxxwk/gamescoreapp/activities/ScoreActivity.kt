@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.maxxxwk.gamescoreapp.R
+import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityScoreBinding
+import com.maxxxwk.gamescoreapp.fragments.dialogs.ConfirmDialog
 
 class ScoreActivity : AppCompatActivity() {
 
@@ -56,6 +59,13 @@ class ScoreActivity : AppCompatActivity() {
         binding.btnSecondTeamScoreDecrement.setOnClickListener {
             decrementScore(binding.tvSecondTeamScore)
         }
+        binding.btnCancel.setOnClickListener {
+            onCancel()
+        }
+    }
+
+    override fun onBackPressed() {
+        onCancel()
     }
 
     private fun setTimerInitialState() {
@@ -90,5 +100,20 @@ class ScoreActivity : AppCompatActivity() {
         }
         score -= 1
         textView.text = score.toString()
+    }
+
+    private fun onCancel() {
+        val dialogTitle = getString(R.string.confirm_cancel_dialog_title)
+        val dialogQuestion = getString(R.string.confirm_cancel_dialog_question)
+        val dialogCallback = object : ConfirmDialogCallback {
+            override fun onPositiveAnswer() {
+                finish()
+            }
+
+            override fun onNegativeAnswer() {}
+        }
+        supportFragmentManager.beginTransaction()
+            .add(ConfirmDialog.newInstance(dialogCallback, dialogTitle, dialogQuestion), "TAG")
+            .commitAllowingStateLoss()
     }
 }

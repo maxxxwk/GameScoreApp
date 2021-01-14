@@ -1,5 +1,5 @@
 package com.maxxxwk.gamescoreapp.callbacks
 
-interface ConfirmCallback {
+interface MessageDialogCallback {
     fun onConfirm()
 }
