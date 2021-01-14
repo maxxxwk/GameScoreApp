@@ -1,4 +1,4 @@
-package com.maxxxwk.gamescoreapp
+package com.maxxxwk.gamescoreapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
+import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityMainBinding
 import com.maxxxwk.gamescoreapp.fragments.dialogs.MessageDialog
