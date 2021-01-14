@@ -26,8 +26,8 @@
         android:layout_marginTop="32dp"
         android:textColor="@color/scarpa_flow"
         android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tvDialogTitle"
+        app:layout_constraintRight_toRightOf="@id/tvDialogTitle"
         app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
         tools:text="@tools:sample/cities" />
 
@@ -41,7 +41,7 @@
         android:paddingVertical="8dp"
         android:text="@string/confirm_button_text"
         android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tvDialogMessage"
+        app:layout_constraintRight_toRightOf="@id/tvDialogMessage"
         app:layout_constraintTop_toBottomOf="@id/tvDialogMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
