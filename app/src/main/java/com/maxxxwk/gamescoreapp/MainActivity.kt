@@ -2,7 +2,8 @@ package com.maxxxwk.gamescoreapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmCallback
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
                 showMessageDialog(title, message, callback)
             }
         }
+        binding.etFirstTeamName.addTextChangedListener(getTeamsNameTextWatcher())
+        binding.etSecondTeamName.addTextChangedListener(getTeamsNameTextWatcher())
     }
 
     private fun hasEmptyField(): Boolean {
@@ -80,6 +83,17 @@ class MainActivity : AppCompatActivity() {
         if (editText.text.isEmpty() && !hasFocus) {
             editText.setText("0")
         }
+    }
+
+    private fun getTeamsNameTextWatcher() = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s?.length == 32) {
+                showWarning(getString(R.string.teams_name_max_length_warning))
+            }
+        }
+        override fun afterTextChanged(s: Editable?) {}
     }
 
     private fun showWarning(message: String?) {
