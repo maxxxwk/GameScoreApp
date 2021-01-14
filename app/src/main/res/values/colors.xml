@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="steel_gray">#262132</color>
+    <color name="champagne">#FBF3D2</color>
+    <color name="bud">#A1A69C</color>
+    <color name="scarpa_flow">#56555E</color>
+    <color name="thunder">#322E32</color>
+</resources>

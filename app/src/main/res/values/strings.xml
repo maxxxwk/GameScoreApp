@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Game score app</string>
+    <string name="teams_names_form_title">Enter teams names</string>
+    <string name="first_team_name_field_hint">Enter first team`s name</string>
+    <string name="second_team_name_field_hint">Enter second team`s name</string>
+    <string name="confirm_button_text">Ok</string>
+    <string name="time_form_title">Enter the time</string>
+    <string name="minutes_field_hint">Minutes</string>
+    <string name="seconds_field_hint">Seconds</string>
+    <string name="first_team_name_field_empty_warning">You should enter name of first team!</string>
+    <string name="second_team_name_field_empty_warning">You should enter name of second team!</string>
+</resources>
