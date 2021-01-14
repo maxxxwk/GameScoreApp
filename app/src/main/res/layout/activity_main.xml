@@ -22,7 +22,7 @@
 
     <EditText
         android:id="@+id/etFirstTeamName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
@@ -35,15 +35,14 @@
         android:paddingVertical="8dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tvTeamsNamesFormTitle"
+        app:layout_constraintRight_toRightOf="@id/tvTeamsNamesFormTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTeamsNamesFormTitle" />
 
 
     <EditText
         android:id="@+id/etSecondTeamName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
@@ -56,9 +55,8 @@
         android:paddingVertical="8dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/etFirstTeamName"
+        app:layout_constraintRight_toRightOf="@id/etFirstTeamName"
         app:layout_constraintTop_toBottomOf="@id/etFirstTeamName" />
 
     <TextView
@@ -70,15 +68,15 @@
         android:textColor="@color/steel_gray"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/etSecondTeamName"
+        app:layout_constraintRight_toRightOf="@id/etSecondTeamName"
         app:layout_constraintTop_toBottomOf="@id/etSecondTeamName" />
 
     <EditText
         android:id="@+id/etMinutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
         android:background="@color/white"
         android:digits="0123456789"
@@ -90,7 +88,7 @@
         android:paddingVertical="8dp"
         android:textAlignment="viewEnd"
         android:textColor="@color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tvTimeFormTitle"
         app:layout_constraintRight_toLeftOf="@id/etSeconds"
         app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
 
@@ -98,7 +96,7 @@
         android:id="@+id/etSeconds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
         android:background="@color/white"
         android:digits="0123456789"
@@ -111,7 +109,7 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/black"
         app:layout_constraintLeft_toRightOf="@id/etMinutes"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toRightOf="@id/tvTimeFormTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
 
     <Button
@@ -119,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="160dp"
         android:backgroundTint="@color/steel_gray"
         android:paddingHorizontal="16dp"
@@ -128,7 +126,7 @@
         android:textAllCaps="false"
         android:textColor="@color/champagne"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toLeftOf="@id/etMinutes"
+        app:layout_constraintRight_toRightOf="@id/etSeconds"
+        app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
