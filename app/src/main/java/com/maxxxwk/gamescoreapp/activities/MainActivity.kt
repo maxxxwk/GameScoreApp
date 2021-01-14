@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 showMessageDialog(title, message, callback)
+            } else {
+                startScoreActivity()
             }
         }
         binding.etFirstTeamName.addTextChangedListener(getTeamsNameTextWatcher())
@@ -94,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                 showWarning(getString(R.string.teams_name_max_length_warning))
             }
         }
+
         override fun afterTextChanged(s: Editable?) {}
     }
 
@@ -107,5 +110,12 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(MessageDialog.newInstance(title, message, callback), "TAG")
             .commitAllowingStateLoss()
+    }
+    private fun startScoreActivity() {
+        val firstTeamName = binding.etFirstTeamName.text.toString()
+        val secondTeamName = binding.etSecondTeamName.text.toString()
+        val minutes = binding.etMinutes.text.toString().toInt()
+        val seconds = binding.etSeconds.text.toString().toInt()
+        ScoreActivity.start(this, firstTeamName, secondTeamName, minutes, seconds)
     }
 }
