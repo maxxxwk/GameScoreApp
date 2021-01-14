@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import com.maxxxwk.gamescoreapp.databinding.ActivityScoreBinding
 
 class ScoreActivity : AppCompatActivity() {
@@ -37,6 +40,22 @@ class ScoreActivity : AppCompatActivity() {
         setContentView(binding.root)
         setTeamsNames()
         setTimerInitialState()
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        binding.btnFirstTeamScoreIncrement.setOnClickListener {
+            incrementScore(binding.tvFirstTeamScore)
+        }
+        binding.btnFirstTeamScoreDecrement.setOnClickListener {
+            decrementScore(binding.tvFirstTeamScore)
+        }
+        binding.btnSecondTeamScoreIncrement.setOnClickListener {
+            incrementScore(binding.tvSecondTeamScore)
+        }
+        binding.btnSecondTeamScoreDecrement.setOnClickListener {
+            decrementScore(binding.tvSecondTeamScore)
+        }
     }
 
     private fun setTimerInitialState() {
@@ -53,5 +72,23 @@ class ScoreActivity : AppCompatActivity() {
     private fun setTeamsNames() {
         binding.tvFirstTeamName.text = intent.getStringExtra(FIRST_TEAM_NAME_KEY)
         binding.tvSecondTeamName.text = intent.getStringExtra(SECOND_TEAM_NAME_KEY)
+    }
+
+    private fun incrementScore(textView: TextView) {
+        var score = textView.text.toString().toInt()
+        if (score == Int.MAX_VALUE) {
+            return
+        }
+        score += 1
+        textView.text = score.toString()
+    }
+
+    private fun decrementScore(textView: TextView) {
+        var score = textView.text.toString().toInt()
+        if (score == 0) {
+            return
+        }
+        score -= 1
+        textView.text = score.toString()
     }
 }
