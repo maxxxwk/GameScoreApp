@@ -1,1 +1,1 @@
-# gamescoreapp
+# GameScoreApp
