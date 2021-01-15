@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.etFirstTeamName.addTextChangedListener(getTeamsNameTextWatcher())
         binding.etSecondTeamName.addTextChangedListener(getTeamsNameTextWatcher())
+        binding.etSeconds.addTextChangedListener(getSecondsLimitTextWatcher())
     }
 
     private fun hasEmptyField(): Boolean {
@@ -91,6 +92,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun afterTextChanged(s: Editable?) {}
+    }
+
+    private fun getSecondsLimitTextWatcher() = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        override fun afterTextChanged(s: Editable?) {
+            s?.let {
+                val seconds = it.toString().toInt()
+                if (seconds >= 60) {
+                    binding.etSeconds.setText("${seconds - 60}")
+                    if (binding.etMinutes.text.isEmpty()) {
+                        binding.etMinutes.setText("1")
+                    } else {
+                        val minutes = binding.etMinutes.text.toString().toInt()
+                        binding.etMinutes.setText("${minutes + 1}")
+                    }
+                }
+            }
+        }
+
     }
 
     private fun showWarning(message: String?) {

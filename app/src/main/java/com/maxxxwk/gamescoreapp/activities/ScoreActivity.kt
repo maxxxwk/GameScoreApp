@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.os.CountDownTimer
 import android.widget.TextView
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
@@ -15,6 +14,10 @@ import com.maxxxwk.gamescoreapp.fragments.dialogs.ConfirmDialog
 class ScoreActivity : AppCompatActivity() {
 
     private val binding: ActivityScoreBinding by lazy { ActivityScoreBinding.inflate(layoutInflater) }
+    private var minutes = 0
+    private var seconds = 0
+    private lateinit var countDownTimer: CountDownTimer
+    private var lastTimeInMills = 0L
 
     companion object {
         private const val FIRST_TEAM_NAME_KEY = "FIRST_TEAM_NAME_KEY"
@@ -43,7 +46,29 @@ class ScoreActivity : AppCompatActivity() {
         setContentView(binding.root)
         setTeamsNames()
         setTimerInitialState()
+        setupCountDownTimer()
         setupListeners()
+    }
+
+    private fun setupCountDownTimer() {
+        val timeInMilliseconds = (minutes * 60 + seconds) * 1000L
+
+        countDownTimer = object : CountDownTimer(timeInMilliseconds, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                if (seconds > 0) {
+                    seconds -= 1
+                } else {
+                    seconds = 59
+                    minutes -= 1
+                }
+                updateTimerState()
+            }
+
+            override fun onFinish() {
+                //show dialog
+            }
+
+        }
     }
 
     private fun setupListeners() {
@@ -62,15 +87,36 @@ class ScoreActivity : AppCompatActivity() {
         binding.btnCancel.setOnClickListener {
             onCancel()
         }
+        binding.btnStartTimer.setOnClickListener {
+            startTimer()
+        }
+        binding.btnStopTimer.setOnClickListener {
+            stopTimer()
+        }
     }
 
     override fun onBackPressed() {
         onCancel()
     }
 
+    private fun startTimer() {
+        if (minutes != 0 || seconds != 0) {
+            countDownTimer.start()
+        }
+    }
+
+    private fun stopTimer() {
+        countDownTimer.cancel()
+        setupCountDownTimer()
+    }
+
     private fun setTimerInitialState() {
-        val minutes = intent.getIntExtra(MINUTES_KEY, 0)
-        val seconds = intent.getIntExtra(SECONDS_KEY, 0)
+        minutes = intent.getIntExtra(MINUTES_KEY, 0)
+        seconds = intent.getIntExtra(SECONDS_KEY, 0)
+        updateTimerState()
+    }
+
+    private fun updateTimerState() {
         binding.tvTimer.text = when {
             minutes < 10 && seconds < 10 -> "0$minutes:0$seconds"
             minutes >= 10 && seconds < 10 -> "$minutes:0$seconds"
