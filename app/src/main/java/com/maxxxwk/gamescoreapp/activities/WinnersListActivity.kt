@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maxxxwk.gamescoreapp.adapters.WinnersListAdapter
 import com.maxxxwk.gamescoreapp.databinding.ActivityWinnersListBinding
@@ -19,7 +20,6 @@ class WinnersListActivity : AppCompatActivity() {
     }
 
 
-
     companion object {
         private val listOfWinners = mutableListOf<Winner>()
         private val adapter: WinnersListAdapter = WinnersListAdapter()
@@ -29,6 +29,7 @@ class WinnersListActivity : AppCompatActivity() {
             listOfWinners.sortByDescending(Winner::score)
             adapter.submitList(listOfWinners)
         }
+
         private fun clearWinnersList() {
             listOfWinners.clear()
             adapter.submitList(listOfWinners)
@@ -62,16 +63,19 @@ class WinnersListActivity : AppCompatActivity() {
     private fun showRecyclerView() {
         binding.tvEmptyWinnersListMessage.visibility = View.GONE
         binding.tvWinnersListTitle.visibility = View.VISIBLE
-        binding.btnBack.visibility = View.VISIBLE
         binding.btnClear.visibility = View.VISIBLE
+        binding.btnBack.visibility = View.VISIBLE
         binding.rvWinnersList.visibility = View.VISIBLE
         binding.rvWinnersList.layoutManager = LinearLayoutManager(this)
         binding.rvWinnersList.adapter = adapter
+
+
     }
+
     private fun hideRecyclerView() {
         binding.tvWinnersListTitle.visibility = View.GONE
-        binding.btnBack.visibility = View.GONE
         binding.btnClear.visibility = View.GONE
+        binding.btnBack.visibility = View.GONE
         binding.rvWinnersList.visibility = View.GONE
         binding.tvEmptyWinnersListMessage.visibility = View.VISIBLE
     }
