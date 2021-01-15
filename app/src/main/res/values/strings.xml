@@ -28,4 +28,8 @@
     <string name="show_winners_list_button_text">List of winners</string>
     <string name="game_over_dialog_title">Game over!</string>
     <string name="draw_result_dialog_message">The result is draw!</string>
+    <string name="empty_winners_list_message">The list of winners is empty</string>
+    <string name="list_of_winners_title">List of winners</string>
+    <string name="clear_list_button_text">Clear list</string>
+    <string name="back_button_text">Back</string>
 </resources>

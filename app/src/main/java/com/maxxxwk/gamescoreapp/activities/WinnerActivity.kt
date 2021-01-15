@@ -45,7 +45,8 @@ class WinnerActivity : AppCompatActivity() {
     }
 
     private fun showWinnersList() {
-        //start activity with list of winners
+        WinnersListActivity.start(this)
+        finish()
     }
 
     fun putDataInViews() {

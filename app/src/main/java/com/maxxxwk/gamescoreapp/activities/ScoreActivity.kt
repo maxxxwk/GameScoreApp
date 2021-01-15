@@ -12,6 +12,8 @@ import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityScoreBinding
 import com.maxxxwk.gamescoreapp.fragments.dialogs.ConfirmDialog
 import com.maxxxwk.gamescoreapp.fragments.dialogs.MessageDialog
+import com.maxxxwk.gamescoreapp.models.Winner
+import kotlin.math.max
 
 class ScoreActivity : AppCompatActivity() {
 
@@ -92,6 +94,7 @@ class ScoreActivity : AppCompatActivity() {
                         loser = binding.tvFirstTeamName.text.toString()
                     }
                 }
+                WinnersListActivity.addNewWinner(Winner(winner, max(firstTeamScore, secondTeamScore)))
                 val message = "$winner is winner!"
                 val callback = object : MessageDialogCallback {
                     override fun onConfirm() {

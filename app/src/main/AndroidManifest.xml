@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameScoreApp">
-        <activity android:name=".activities.WinnerActivity"></activity>
+        <activity android:name=".activities.WinnersListActivity"></activity>
+        <activity android:name=".activities.WinnerActivity" />
         <activity android:name=".activities.ScoreActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
