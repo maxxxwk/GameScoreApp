@@ -8,8 +8,10 @@ import android.os.CountDownTimer
 import android.widget.TextView
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
+import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityScoreBinding
 import com.maxxxwk.gamescoreapp.fragments.dialogs.ConfirmDialog
+import com.maxxxwk.gamescoreapp.fragments.dialogs.MessageDialog
 
 class ScoreActivity : AppCompatActivity() {
 
@@ -17,7 +19,6 @@ class ScoreActivity : AppCompatActivity() {
     private var minutes = 0
     private var seconds = 0
     private lateinit var countDownTimer: CountDownTimer
-    private var lastTimeInMills = 0L
 
     companion object {
         private const val FIRST_TEAM_NAME_KEY = "FIRST_TEAM_NAME_KEY"
@@ -65,10 +66,56 @@ class ScoreActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                //show dialog
+                onGameOver()
             }
 
         }
+    }
+
+    private fun onGameOver() {
+        val firstTeamScore = binding.tvFirstTeamScore.text.toString().toInt()
+        val secondTeamScore = binding.tvSecondTeamScore.text.toString().toInt()
+        val gameScore = "$firstTeamScore:$secondTeamScore"
+        val dialogTitle = getString(R.string.game_over_dialog_title)
+        when {
+            firstTeamScore != secondTeamScore -> {
+                var winner = ""
+                var loser = ""
+                when {
+                    firstTeamScore > secondTeamScore -> {
+                        winner = binding.tvFirstTeamName.text.toString()
+                        loser = binding.tvSecondTeamName.text.toString()
+
+                    }
+                    firstTeamScore < secondTeamScore -> {
+                        winner = binding.tvSecondTeamName.text.toString()
+                        loser = binding.tvFirstTeamName.text.toString()
+                    }
+                }
+                val message = "$winner is winner!"
+                val callback = object : MessageDialogCallback {
+                    override fun onConfirm() {
+                        WinnerActivity.start(this@ScoreActivity, winner, loser, gameScore)
+                        finish()
+                    }
+                }
+                showGameOverDialog(dialogTitle, message, callback)
+            }
+            else -> {
+                val message = getString(R.string.draw_result_dialog_message)
+                val callback = object : MessageDialogCallback {
+                    override fun onConfirm() {
+                        finish()
+                    }
+                }
+                showGameOverDialog(dialogTitle, message, callback)
+            }
+        }
+    }
+    private fun showGameOverDialog(title: String, message: String, callback: MessageDialogCallback) {
+        supportFragmentManager.beginTransaction()
+            .add(MessageDialog.newInstance(title, message, callback), "TAG")
+            .commitAllowingStateLoss()
     }
 
     private fun setupListeners() {

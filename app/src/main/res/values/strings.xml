@@ -21,4 +21,11 @@
     <string name="negative_button_text">No</string>
     <string name="confirm_cancel_dialog_title">Confirm action</string>
     <string name="confirm_cancel_dialog_question">Are you really want to cancel?</string>
+    <string name="winner_title">Winner</string>
+    <string name="loser_title">Loser</string>
+    <string name="game_score_title">Game score</string>
+    <string name="new_game_button_text">New game</string>
+    <string name="show_winners_list_button_text">List of winners</string>
+    <string name="game_over_dialog_title">Game over!</string>
+    <string name="draw_result_dialog_message">The result is draw!</string>
 </resources>

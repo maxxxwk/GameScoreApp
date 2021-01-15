@@ -11,7 +11,7 @@
         android:id="@+id/tvTeamsNamesFormTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="48dp"
+        android:layout_marginTop="48dp"
         android:text="@string/teams_names_form_title"
         android:textColor="@color/steel_gray"
         android:textSize="32sp"
