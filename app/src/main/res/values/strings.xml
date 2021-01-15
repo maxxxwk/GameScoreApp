@@ -19,8 +19,8 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="positive_button_text">Yes</string>
     <string name="negative_button_text">No</string>
-    <string name="confirm_cancel_dialog_title">Confirm action</string>
-    <string name="confirm_cancel_dialog_question">Are you really want to cancel?</string>
+    <string name="confirm_dialog_title">Confirm action</string>
+    <string name="confirm_cancel_dialog_question">Do you really want to cancel?</string>
     <string name="winner_title">Winner</string>
     <string name="loser_title">Loser</string>
     <string name="game_score_title">Game score</string>
@@ -32,4 +32,5 @@
     <string name="list_of_winners_title">List of winners</string>
     <string name="clear_list_button_text">Clear list</string>
     <string name="back_button_text">Back</string>
+    <string name="confirm_clear_dialog_message">Do you really want to clear list of winners?</string>
 </resources>

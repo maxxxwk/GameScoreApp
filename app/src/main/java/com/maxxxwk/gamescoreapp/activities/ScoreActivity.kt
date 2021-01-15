@@ -199,7 +199,7 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun onCancel() {
-        val dialogTitle = getString(R.string.confirm_cancel_dialog_title)
+        val dialogTitle = getString(R.string.confirm_dialog_title)
         val dialogQuestion = getString(R.string.confirm_cancel_dialog_question)
         val dialogCallback = object : ConfirmDialogCallback {
             override fun onPositiveAnswer() {

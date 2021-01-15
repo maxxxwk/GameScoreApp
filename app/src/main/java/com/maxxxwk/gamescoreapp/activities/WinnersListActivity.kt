@@ -5,10 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.adapters.WinnersListAdapter
+import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityWinnersListBinding
+import com.maxxxwk.gamescoreapp.fragments.dialogs.ConfirmDialog
 import com.maxxxwk.gamescoreapp.models.Winner
 
 class WinnersListActivity : AppCompatActivity() {
@@ -55,9 +57,23 @@ class WinnersListActivity : AppCompatActivity() {
             finish()
         }
         binding.btnClear.setOnClickListener {
-            clearWinnersList()
-            hideRecyclerView()
+            showClearConfirmDialog()
         }
+    }
+
+    private fun showClearConfirmDialog() {
+        val title = getString(R.string.confirm_dialog_title)
+        val question = getString(R.string.confirm_clear_dialog_message)
+        val callback = object : ConfirmDialogCallback {
+            override fun onPositiveAnswer() {
+                clearWinnersList()
+                hideRecyclerView()
+            }
+            override fun onNegativeAnswer() {}
+        }
+        supportFragmentManager.beginTransaction()
+            .add(ConfirmDialog.newInstance(callback, title, question), "TAG")
+            .commitAllowingStateLoss()
     }
 
     private fun showRecyclerView() {
