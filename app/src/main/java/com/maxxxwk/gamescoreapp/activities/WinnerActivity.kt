@@ -49,7 +49,7 @@ class WinnerActivity : AppCompatActivity() {
         finish()
     }
 
-    fun putDataInViews() {
+    private fun putDataInViews() {
         val winner = intent.getStringExtra(WINNER_NAME_KEY)
         val loser = intent.getStringExtra(LOSER_NAME_KEY)
         val gameScore = intent.getStringExtra(GAME_SCORE_KEY)

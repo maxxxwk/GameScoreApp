@@ -4,23 +4,22 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.widget.TextView
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
 import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
+import com.maxxxwk.gamescoreapp.callbacks.TimerCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityScoreBinding
 import com.maxxxwk.gamescoreapp.fragments.dialogs.ConfirmDialog
 import com.maxxxwk.gamescoreapp.fragments.dialogs.MessageDialog
 import com.maxxxwk.gamescoreapp.models.Winner
+import com.maxxxwk.gamescoreapp.utils.GameTimer
 import kotlin.math.max
 
 class ScoreActivity : AppCompatActivity() {
 
     private val binding: ActivityScoreBinding by lazy { ActivityScoreBinding.inflate(layoutInflater) }
-    private var minutes = 0
-    private var seconds = 0
-    private lateinit var countDownTimer: CountDownTimer
+    private lateinit var gameTimer: GameTimer
 
     companion object {
         private const val FIRST_TEAM_NAME_KEY = "FIRST_TEAM_NAME_KEY"
@@ -48,37 +47,29 @@ class ScoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setTeamsNames()
-        setTimerInitialState()
-        setupCountDownTimer()
+        setupGameTimer()
         setupListeners()
     }
 
-    private fun setupCountDownTimer() {
-        val timeInMilliseconds = (minutes * 60 + seconds) * 1000L
-
-        countDownTimer = object : CountDownTimer(timeInMilliseconds, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                if (seconds > 0) {
-                    seconds -= 1
-                } else {
-                    seconds = 59
-                    minutes -= 1
+    private fun setupGameTimer() {
+        val minutes = intent.getIntExtra(MINUTES_KEY, 0)
+        val seconds = intent.getIntExtra(SECONDS_KEY, 0)
+        gameTimer = GameTimer(
+            minutes,
+            seconds,
+            binding.tvTimer,
+            object : TimerCallback {
+                override fun onFinish() {
+                    onGameOver()
                 }
-                updateTimerState()
             }
-
-            override fun onFinish() {
-                onGameOver()
-            }
-
-        }
+        )
     }
 
     private fun onGameOver() {
         val firstTeamScore = binding.tvFirstTeamScore.text.toString().toInt()
         val secondTeamScore = binding.tvSecondTeamScore.text.toString().toInt()
         val gameScore = "$firstTeamScore:$secondTeamScore"
-        val dialogTitle = getString(R.string.game_over_dialog_title)
         when {
             firstTeamScore != secondTeamScore -> {
                 var winner = ""
@@ -94,7 +85,12 @@ class ScoreActivity : AppCompatActivity() {
                         loser = binding.tvFirstTeamName.text.toString()
                     }
                 }
-                WinnersListActivity.addNewWinner(Winner(winner, max(firstTeamScore, secondTeamScore)))
+                WinnersListActivity.addNewWinner(
+                    Winner(
+                        winner,
+                        max(firstTeamScore, secondTeamScore)
+                    )
+                )
                 val message = "$winner is winner!"
                 val callback = object : MessageDialogCallback {
                     override fun onConfirm() {
@@ -102,7 +98,7 @@ class ScoreActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-                showGameOverDialog(dialogTitle, message, callback)
+                showGameOverDialog(message, callback)
             }
             else -> {
                 val message = getString(R.string.draw_result_dialog_message)
@@ -111,11 +107,16 @@ class ScoreActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-                showGameOverDialog(dialogTitle, message, callback)
+                showGameOverDialog(message, callback)
             }
         }
     }
-    private fun showGameOverDialog(title: String, message: String, callback: MessageDialogCallback) {
+
+    private fun showGameOverDialog(
+        message: String,
+        callback: MessageDialogCallback
+    ) {
+        val title = getString(R.string.game_over_dialog_title)
         supportFragmentManager.beginTransaction()
             .add(MessageDialog.newInstance(title, message, callback), "TAG")
             .commitAllowingStateLoss()
@@ -135,44 +136,18 @@ class ScoreActivity : AppCompatActivity() {
             decrementScore(binding.tvSecondTeamScore)
         }
         binding.btnCancel.setOnClickListener {
-            onCancel()
+            showConfirmCancelDialog()
         }
         binding.btnStartTimer.setOnClickListener {
-            startTimer()
+            gameTimer.startTimer()
         }
         binding.btnStopTimer.setOnClickListener {
-            stopTimer()
+            gameTimer.stopTimer()
         }
     }
 
     override fun onBackPressed() {
-        onCancel()
-    }
-
-    private fun startTimer() {
-        if (minutes != 0 || seconds != 0) {
-            countDownTimer.start()
-        }
-    }
-
-    private fun stopTimer() {
-        countDownTimer.cancel()
-        setupCountDownTimer()
-    }
-
-    private fun setTimerInitialState() {
-        minutes = intent.getIntExtra(MINUTES_KEY, 0)
-        seconds = intent.getIntExtra(SECONDS_KEY, 0)
-        updateTimerState()
-    }
-
-    private fun updateTimerState() {
-        binding.tvTimer.text = when {
-            minutes < 10 && seconds < 10 -> "0$minutes:0$seconds"
-            minutes >= 10 && seconds < 10 -> "$minutes:0$seconds"
-            minutes < 10 && seconds >= 10 -> "0$minutes:$seconds"
-            else -> "$minutes:$seconds"
-        }
+        showConfirmCancelDialog()
     }
 
     private fun setTeamsNames() {
@@ -198,7 +173,7 @@ class ScoreActivity : AppCompatActivity() {
         textView.text = score.toString()
     }
 
-    private fun onCancel() {
+    private fun showConfirmCancelDialog() {
         val dialogTitle = getString(R.string.confirm_dialog_title)
         val dialogQuestion = getString(R.string.confirm_cancel_dialog_question)
         val dialogCallback = object : ConfirmDialogCallback {
