@@ -30,7 +30,7 @@ class MessageDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = MessageDialogFragmentBinding.inflate(layoutInflater, container, false)
-        putDataInView()
+        putDataFromIntentToView()
         setupListeners()
         return binding.root
     }
@@ -42,7 +42,7 @@ class MessageDialog : DialogFragment() {
         }
     }
 
-    private fun putDataInView() {
+    private fun putDataFromIntentToView() {
         binding.tvDialogTitle.text = title
         binding.tvDialogMessage.text = message
     }

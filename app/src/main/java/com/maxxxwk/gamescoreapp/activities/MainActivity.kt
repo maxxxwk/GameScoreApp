@@ -41,21 +41,15 @@ class MainActivity : AppCompatActivity() {
                 startScoreActivity()
             }
         }
-        binding.etFirstTeamName.addTextChangedListener(getTeamsNameTextWatcher())
-        binding.etSecondTeamName.addTextChangedListener(getTeamsNameTextWatcher())
+        binding.etFirstTeamName.addTextChangedListener(getTeamsNameLengthLimitTextWatcher())
+        binding.etSecondTeamName.addTextChangedListener(getTeamsNameLengthLimitTextWatcher())
         binding.etSeconds.addTextChangedListener(getSecondsLimitTextWatcher())
     }
 
-    private fun hasEmptyField(): Boolean {
-        if (binding.etFirstTeamName.text.isEmpty() ||
+    private fun hasEmptyField() = (binding.etFirstTeamName.text.isEmpty() ||
             binding.etSecondTeamName.text.isEmpty() ||
             binding.etMinutes.text.isEmpty() ||
-            binding.etSeconds.text.isEmpty()
-        ) {
-            return true
-        }
-        return false
-    }
+            binding.etSeconds.text.isEmpty())
 
     private fun getFirstEmptyField() = when {
         binding.etFirstTeamName.text.isEmpty() -> binding.etFirstTeamName
@@ -78,11 +72,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDefaultValueIfTimeFieldEmpty(editText: EditText, hasFocus: Boolean) {
         if (editText.text.isEmpty() && !hasFocus) {
-            editText.setText("0")
+            editText.setText(getString(R.string.time_field_default_value))
         }
     }
 
-    private fun getTeamsNameTextWatcher() = object : TextWatcher {
+    private fun getTeamsNameLengthLimitTextWatcher() = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -102,13 +96,12 @@ class MainActivity : AppCompatActivity() {
             s?.let {
                 val seconds = it.toString().toInt()
                 if (seconds >= 60) {
-                    binding.etSeconds.setText("${seconds - 60}")
+                    it.replace(0, it.length, (seconds - 60).toString())
                     if (binding.etMinutes.text.isEmpty()) {
-                        binding.etMinutes.setText("1")
-                    } else {
-                        val minutes = binding.etMinutes.text.toString().toInt()
-                        binding.etMinutes.setText("${minutes + 1}")
+                        binding.etMinutes.setText(getString(R.string.time_field_default_value))
                     }
+                    val minutes = binding.etMinutes.text.toString().toInt()
+                    binding.etMinutes.setText((minutes + 1).toString())
                 }
             }
         }

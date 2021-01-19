@@ -1,14 +1,14 @@
 package com.maxxxwk.gamescoreapp.callbacks
 
 import androidx.recyclerview.widget.DiffUtil
-import com.maxxxwk.gamescoreapp.models.Winner
+import com.maxxxwk.gamescoreapp.models.Team
 
-class WinnerDiffCallback : DiffUtil.ItemCallback<Winner>() {
-    override fun areItemsTheSame(oldItem: Winner, newItem: Winner): Boolean {
+class WinnerDiffCallback : DiffUtil.ItemCallback<Team>() {
+    override fun areItemsTheSame(oldItem: Team, newItem: Team): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Winner, newItem: Winner): Boolean {
+    override fun areContentsTheSame(oldItem: Team, newItem: Team): Boolean {
         return oldItem == newItem
     }
 }

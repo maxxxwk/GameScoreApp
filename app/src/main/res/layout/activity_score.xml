@@ -74,12 +74,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="0"
         android:textColor="@color/steel_gray"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="@id/tvFirstTeamName"
         app:layout_constraintRight_toRightOf="@id/tvFirstTeamName"
-        app:layout_constraintTop_toBottomOf="@id/tvFirstTeamName" />
+        app:layout_constraintTop_toBottomOf="@id/tvFirstTeamName"
+        tools:text="0" />
 
     <Button
         android:id="@+id/btnFirstTeamScoreIncrement"
@@ -135,12 +135,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="0"
         android:textColor="@color/steel_gray"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="@id/tvSecondTeamName"
         app:layout_constraintRight_toRightOf="@id/tvSecondTeamName"
-        app:layout_constraintTop_toBottomOf="@id/tvSecondTeamName" />
+        app:layout_constraintTop_toBottomOf="@id/tvSecondTeamName"
+        tools:text="0" />
 
     <Button
         android:id="@+id/btnSecondTeamScoreIncrement"

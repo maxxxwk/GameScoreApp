@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maxxxwk.gamescoreapp.callbacks.WinnerDiffCallback
 import com.maxxxwk.gamescoreapp.databinding.WinnerListItemBinding
-import com.maxxxwk.gamescoreapp.models.Winner
+import com.maxxxwk.gamescoreapp.models.Team
 
 class WinnersListAdapter :
-    ListAdapter<Winner, WinnersListAdapter.ViewHolder>(WinnerDiffCallback()) {
+    ListAdapter<Team, WinnersListAdapter.ViewHolder>(WinnerDiffCallback()) {
 
     class ViewHolder(private val binding: WinnerListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(winner: Winner) {
+        fun bind(winner: Team) {
             binding.tvWinner.text = winner.name
             binding.tvScore.text = "Score: ${winner.score}"
         }

@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.maxxxwk.gamescoreapp.databinding.ActivityWinnerBinding
+import com.maxxxwk.gamescoreapp.models.Team
+import java.lang.StringBuilder
 
 class WinnerActivity : AppCompatActivity() {
 
@@ -15,15 +17,13 @@ class WinnerActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val WINNER_NAME_KEY = "WINNER_NAME_KEY"
-        private const val LOSER_NAME_KEY = "LOSER_NAME_KEY"
-        private const val GAME_SCORE_KEY = "GAME_SCORE_KEY"
+        private const val WINNER_KEY = "WINNER_KEY"
+        private const val LOSER_KEY = "LOSER_KEY"
 
-        fun start(context: Context, winner: String, loser: String, gameScore: String) {
+        fun start(context: Context, winner: Team, loser: Team) {
             val intent = Intent(context, WinnerActivity::class.java)
-            intent.putExtra(WINNER_NAME_KEY, winner)
-            intent.putExtra(LOSER_NAME_KEY, loser)
-            intent.putExtra(GAME_SCORE_KEY, gameScore)
+            intent.putExtra(WINNER_KEY, winner)
+            intent.putExtra(LOSER_KEY, loser)
             context.startActivity(intent)
         }
     }
@@ -31,7 +31,7 @@ class WinnerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        putDataInViews()
+        putDataFromIntentToViews()
         setupListeners()
     }
 
@@ -49,12 +49,19 @@ class WinnerActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun putDataInViews() {
-        val winner = intent.getStringExtra(WINNER_NAME_KEY)
-        val loser = intent.getStringExtra(LOSER_NAME_KEY)
-        val gameScore = intent.getStringExtra(GAME_SCORE_KEY)
-        binding.tvWinnerTeamName.text = winner
-        binding.tvLoserTeamName.text = loser
-        binding.tvGameScore.text = gameScore
+    private fun putDataFromIntentToViews() {
+        val winner = intent.getParcelableExtra<Team>(WINNER_KEY)
+        val loser = intent.getParcelableExtra<Team>(LOSER_KEY)
+        val gameScore = StringBuilder()
+        winner?.let {
+            binding.tvWinnerTeamName.text = it.name
+            gameScore.append(it.score)
+            gameScore.append(":")
+        }
+        loser?.let {
+            binding.tvLoserTeamName.text = it.name
+            gameScore.append(it.score)
+            binding.tvGameScore.text = gameScore.toString()
+        }
     }
 }
