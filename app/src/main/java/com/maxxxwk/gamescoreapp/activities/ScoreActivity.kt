@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
 import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
@@ -167,8 +168,12 @@ class ScoreActivity : AppCompatActivity() {
         callback: MessageDialogCallback
     ) {
         val title = getString(R.string.time_over_dialog_title)
+        supportFragmentManager.findFragmentByTag(getString(R.string.confirm_cancel_dialog_tag))
+            ?.let {
+                supportFragmentManager.beginTransaction().remove(it).commitAllowingStateLoss()
+            }
         supportFragmentManager.beginTransaction()
-            .add(MessageDialog.newInstance(title, message, callback), "TAG")
+            .add(MessageDialog.newInstance(title, message, callback), getString(R.string.game_result_dialog_tag))
             .commitAllowingStateLoss()
     }
 
@@ -183,7 +188,10 @@ class ScoreActivity : AppCompatActivity() {
             override fun onNegativeAnswer() {}
         }
         supportFragmentManager.beginTransaction()
-            .add(ConfirmDialog.newInstance(title, question, callback), "TAG")
+            .add(
+                ConfirmDialog.newInstance(title, question, callback),
+                getString(R.string.confirm_cancel_dialog_tag)
+            )
             .commitAllowingStateLoss()
     }
 

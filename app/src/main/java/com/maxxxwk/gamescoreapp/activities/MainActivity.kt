@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun afterTextChanged(s: Editable?) {
             s?.let {
-                if(s.toString() != ""){
+                if (s.toString() != "") {
                     val seconds = it.toString().toInt()
                     if (seconds >= 60) {
                         it.replace(0, it.length, (seconds - 60).toString())
@@ -125,7 +125,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         supportFragmentManager.beginTransaction()
-            .add(MessageDialog.newInstance(title, message, callback), "TAG")
+            .add(
+                MessageDialog.newInstance(title, message, callback),
+                getString(R.string.empty_field_error_dialog_tag)
+            )
             .commitAllowingStateLoss()
     }
 

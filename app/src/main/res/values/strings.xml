@@ -34,4 +34,8 @@
     <string name="back_button_text">Back</string>
     <string name="confirm_clear_dialog_message">Do you really want to clear list of winners?</string>
     <string name="time_field_default_value">0</string>
+    <string name="empty_field_error_dialog_tag">EMPTY_FIELD_ERROR_DIALOG</string>
+    <string name="confirm_cancel_dialog_tag">CONFIRM_CANCEL_DIALOG</string>
+    <string name="game_result_dialog_tag">GAME_RESULT_DIALOG</string>
+    <string name="clear_winners_list_confirm_dialog_tag">CLEAR_LIST_CONFIRM_DIALOG</string>
 </resources>

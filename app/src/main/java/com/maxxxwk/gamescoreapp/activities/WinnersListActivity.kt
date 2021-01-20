@@ -91,7 +91,7 @@ class WinnersListActivity : AppCompatActivity() {
             override fun onNegativeAnswer() {}
         }
         supportFragmentManager.beginTransaction()
-            .add(ConfirmDialog.newInstance(title, question, callback), "TAG")
+            .add(ConfirmDialog.newInstance(title, question, callback), getString(R.string.clear_winners_list_confirm_dialog_tag))
             .commitAllowingStateLoss()
     }
 }
