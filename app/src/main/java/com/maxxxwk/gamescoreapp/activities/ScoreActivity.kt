@@ -146,8 +146,8 @@ class ScoreActivity : AppCompatActivity() {
                 else -> {
                     winner?.let { winner ->
                         WinnersListActivity.addNewWinner(winner)
+                        val message = "${winner.name} is winner!"
                         loser?.let { loser ->
-                            val message = "${winner.name} is winner!"
                             val callback = object : MessageDialogCallback {
                                 override fun onConfirm() {
                                     WinnerActivity.start(this@ScoreActivity, winner, loser)

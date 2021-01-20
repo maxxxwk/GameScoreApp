@@ -94,14 +94,16 @@ class MainActivity : AppCompatActivity() {
 
         override fun afterTextChanged(s: Editable?) {
             s?.let {
-                val seconds = it.toString().toInt()
-                if (seconds >= 60) {
-                    it.replace(0, it.length, (seconds - 60).toString())
-                    if (binding.etMinutes.text.isEmpty()) {
-                        binding.etMinutes.setText(getString(R.string.time_field_default_value))
+                if(s.toString() != ""){
+                    val seconds = it.toString().toInt()
+                    if (seconds >= 60) {
+                        it.replace(0, it.length, (seconds - 60).toString())
+                        if (binding.etMinutes.text.isEmpty()) {
+                            binding.etMinutes.setText(getString(R.string.time_field_default_value))
+                        }
+                        val minutes = binding.etMinutes.text.toString().toInt()
+                        binding.etMinutes.setText((minutes + 1).toString())
                     }
-                    val minutes = binding.etMinutes.text.toString().toInt()
-                    binding.etMinutes.setText((minutes + 1).toString())
                 }
             }
         }
