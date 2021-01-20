@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.adapters.WinnersListAdapter
@@ -63,20 +64,36 @@ class WinnersListActivity : AppCompatActivity() {
 
     private fun showListOfWinners() {
         binding.tvEmptyWinnersListMessage.visibility = View.GONE
-        binding.tvWinnersListTitle.visibility = View.VISIBLE
-        binding.btnClear.visibility = View.VISIBLE
-        binding.btnBack.visibility = View.VISIBLE
-        binding.rvWinnersList.visibility = View.VISIBLE
+        binding.groupWinnersListViews.visibility = View.VISIBLE
+        ConstraintSet().apply {
+            clone(binding.root)
+            clear(binding.btnBack.id, ConstraintSet.LEFT)
+            connect(
+                binding.btnBack.id,
+                ConstraintSet.LEFT,
+                binding.btnClear.id,
+                ConstraintSet.RIGHT
+            )
+            applyTo(binding.root)
+        }
         binding.rvWinnersList.layoutManager = LinearLayoutManager(this)
         binding.rvWinnersList.adapter = adapter
     }
 
     private fun hideListOfWinners() {
-        binding.tvWinnersListTitle.visibility = View.GONE
-        binding.btnClear.visibility = View.GONE
-        binding.btnBack.visibility = View.GONE
-        binding.rvWinnersList.visibility = View.GONE
+        binding.groupWinnersListViews.visibility = View.GONE
         binding.tvEmptyWinnersListMessage.visibility = View.VISIBLE
+        ConstraintSet().apply {
+            clone(binding.root)
+            clear(binding.btnBack.id, ConstraintSet.LEFT)
+            connect(
+                binding.btnBack.id,
+                ConstraintSet.LEFT,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.LEFT
+            )
+            applyTo(binding.root)
+        }
     }
 
     private fun showClearConfirmDialog() {
@@ -91,7 +108,10 @@ class WinnersListActivity : AppCompatActivity() {
             override fun onNegativeAnswer() {}
         }
         supportFragmentManager.beginTransaction()
-            .add(ConfirmDialog.newInstance(title, question, callback), getString(R.string.clear_winners_list_confirm_dialog_tag))
+            .add(
+                ConfirmDialog.newInstance(title, question, callback),
+                getString(R.string.clear_winners_list_confirm_dialog_tag)
+            )
             .commitAllowingStateLoss()
     }
 }

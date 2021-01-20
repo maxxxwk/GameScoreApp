@@ -173,7 +173,10 @@ class ScoreActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().remove(it).commitAllowingStateLoss()
             }
         supportFragmentManager.beginTransaction()
-            .add(MessageDialog.newInstance(title, message, callback), getString(R.string.game_result_dialog_tag))
+            .add(
+                MessageDialog.newInstance(title, message, callback),
+                getString(R.string.game_result_dialog_tag)
+            )
             .commitAllowingStateLoss()
     }
 
