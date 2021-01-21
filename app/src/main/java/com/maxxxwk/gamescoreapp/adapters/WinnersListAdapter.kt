@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.maxxxwk.gamescoreapp.callbacks.WinnerDiffCallback
+import com.maxxxwk.gamescoreapp.callbacks.WinnerItemDiffCallback
 import com.maxxxwk.gamescoreapp.databinding.WinnerListItemBinding
 import com.maxxxwk.gamescoreapp.models.Team
 
 class WinnersListAdapter :
-    ListAdapter<Team, WinnersListAdapter.ViewHolder>(WinnerDiffCallback()) {
+    ListAdapter<Team, WinnersListAdapter.ViewHolder>(WinnerItemDiffCallback()) {
 
     class ViewHolder(private val binding: WinnerListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

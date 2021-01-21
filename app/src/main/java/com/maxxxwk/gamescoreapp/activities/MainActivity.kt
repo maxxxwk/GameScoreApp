@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import android.widget.Toast
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
 import com.maxxxwk.gamescoreapp.databinding.ActivityMainBinding
@@ -22,12 +21,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.etFirstTeamName.setOnFocusChangeListener { v, hasFocus ->
-            showWarningIfNameFieldEmpty(v as EditText, hasFocus)
-        }
-        binding.etSecondTeamName.setOnFocusChangeListener { v, hasFocus ->
-            showWarningIfNameFieldEmpty(v as EditText, hasFocus)
-        }
         binding.etMinutes.setOnFocusChangeListener { v, hasFocus ->
             setDefaultValueIfTimeFieldEmpty(v as EditText, hasFocus)
         }
@@ -41,8 +34,6 @@ class MainActivity : AppCompatActivity() {
                 startScoreActivity()
             }
         }
-        binding.etFirstTeamName.addTextChangedListener(getTeamsNameLengthLimitTextWatcher())
-        binding.etSecondTeamName.addTextChangedListener(getTeamsNameLengthLimitTextWatcher())
         binding.etSeconds.addTextChangedListener(getSecondsLimitTextWatcher())
     }
 
@@ -59,33 +50,10 @@ class MainActivity : AppCompatActivity() {
         else -> null
     }
 
-    private fun showWarningIfNameFieldEmpty(editText: EditText, hasFocus: Boolean) {
-        if (editText.text.isEmpty() && !hasFocus) {
-            val warningMessage = when (editText.id) {
-                R.id.etFirstTeamName -> getString(R.string.first_team_name_field_empty_warning)
-                R.id.etSecondTeamName -> getString(R.string.second_team_name_field_empty_warning)
-                else -> null
-            }
-            showWarning(warningMessage)
-        }
-    }
-
     private fun setDefaultValueIfTimeFieldEmpty(editText: EditText, hasFocus: Boolean) {
         if (editText.text.isEmpty() && !hasFocus) {
             editText.setText(getString(R.string.time_field_default_value))
         }
-    }
-
-    private fun getTeamsNameLengthLimitTextWatcher() = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s?.length == 32) {
-                showWarning(getString(R.string.teams_name_max_length_warning))
-            }
-        }
-
-        override fun afterTextChanged(s: Editable?) {}
     }
 
     private fun getSecondsLimitTextWatcher() = object : TextWatcher {
@@ -108,12 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun showWarning(message: String?) {
-        message?.let {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-        }
     }
 
     private fun showEmptyFieldErrorMessageDialog() {
