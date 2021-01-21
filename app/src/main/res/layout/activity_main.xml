@@ -9,13 +9,9 @@
 
     <TextView
         android:id="@+id/tvTeamsNamesFormTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextViewTitle"
         android:layout_marginTop="48dp"
         android:text="@string/teams_names_form_title"
-        android:textColor="@color/steel_gray"
-        android:textSize="32sp"
-        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,13 +57,9 @@
 
     <TextView
         android:id="@+id/tvTimeFormTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="48dp"
+        style="@style/TextViewTitle"
+        android:layout_marginTop="48dp"
         android:text="@string/time_form_title"
-        android:textColor="@color/steel_gray"
-        android:textSize="32sp"
-        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="@id/etSecondTeamName"
         app:layout_constraintRight_toRightOf="@id/etSecondTeamName"
         app:layout_constraintTop_toBottomOf="@id/etSecondTeamName" />
@@ -112,21 +104,19 @@
         app:layout_constraintRight_toRightOf="@id/tvTimeFormTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
 
-    <Button
-        android:id="@+id/btnConfirm"
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierTimeFieldsBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginBottom="160dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="etMinutes, etSeconds" />
+
+    <Button
+        android:id="@+id/btnConfirm"
+        style="@style/ButtonPrimary"
         android:text="@string/confirm_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
-        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/etMinutes"
         app:layout_constraintRight_toRightOf="@id/etSeconds"
-        app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
+        app:layout_constraintTop_toBottomOf="@id/barrierTimeFieldsBottom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

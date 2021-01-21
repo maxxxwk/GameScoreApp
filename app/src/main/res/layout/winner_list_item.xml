@@ -9,29 +9,26 @@
 
     <TextView
         android:id="@+id/tvWinner"
+        style="@style/TextViewTitle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="16dp"
         android:textAlignment="textStart"
-        android:textColor="@color/steel_gray"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tvScore"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        tools:text="Winner team" />
 
     <TextView
         android:id="@+id/tvScore"
+        style="@style/TextView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="16dp"
         android:textAlignment="center"
-        android:textColor="@color/steel_gray"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"

@@ -22,36 +22,24 @@
 
     <Button
         android:id="@+id/btnStartTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/start_timer_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
         app:layout_constraintLeft_toLeftOf="@id/tvTimer"
         app:layout_constraintRight_toLeftOf="@id/btnStopTimer"
         app:layout_constraintTop_toBottomOf="@id/tvTimer" />
 
     <Button
         android:id="@+id/btnStopTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/stop_timer_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
         app:layout_constraintLeft_toRightOf="@id/btnStartTimer"
         app:layout_constraintRight_toRightOf="@id/tvTimer"
         app:layout_constraintTop_toBottomOf="@id/tvTimer" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier1"
+        android:id="@+id/barrierTimerButtonsBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
@@ -66,7 +54,7 @@
         android:textSize="32sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier1"
+        app:layout_constraintTop_toBottomOf="@id/barrierTimerButtonsBottom"
         tools:text="First team`s name" />
 
     <TextView
@@ -83,36 +71,24 @@
 
     <Button
         android:id="@+id/btnFirstTeamScoreIncrement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/score_increment_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
         app:layout_constraintLeft_toLeftOf="@id/tvFirstTeamScore"
         app:layout_constraintRight_toLeftOf="@id/btnFirstTeamScoreDecrement"
         app:layout_constraintTop_toBottomOf="@id/tvFirstTeamScore" />
 
     <Button
         android:id="@+id/btnFirstTeamScoreDecrement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/score_decrement_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
         app:layout_constraintLeft_toRightOf="@id/btnFirstTeamScoreIncrement"
         app:layout_constraintRight_toRightOf="@id/tvFirstTeamScore"
         app:layout_constraintTop_toBottomOf="@id/tvFirstTeamScore" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
+        android:id="@+id/barrierFirstScoreButtonsBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
@@ -127,7 +103,7 @@
         android:textSize="32sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintTop_toBottomOf="@id/barrierFirstScoreButtonsBottom"
         tools:text="Second team`s name" />
 
     <TextView
@@ -144,36 +120,24 @@
 
     <Button
         android:id="@+id/btnSecondTeamScoreIncrement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/score_increment_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
         app:layout_constraintLeft_toLeftOf="@id/tvSecondTeamScore"
         app:layout_constraintRight_toLeftOf="@id/btnSecondTeamScoreDecrement"
         app:layout_constraintTop_toBottomOf="@id/tvSecondTeamScore" />
 
     <Button
         android:id="@+id/btnSecondTeamScoreDecrement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginHorizontal="8dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/score_decrement_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
         app:layout_constraintLeft_toRightOf="@id/btnSecondTeamScoreIncrement"
         app:layout_constraintRight_toRightOf="@id/tvSecondTeamScore"
         app:layout_constraintTop_toBottomOf="@id/tvSecondTeamScore" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier3"
+        android:id="@+id/barrierSecondScoreButtonsBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
@@ -181,17 +145,10 @@
 
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="48dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
+        style="@style/ButtonPrimary"
         android:text="@string/cancel_button_text"
-        android:textAllCaps="false"
-        android:textColor="@color/champagne"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier3" />
+        app:layout_constraintTop_toBottomOf="@id/barrierSecondScoreButtonsBottom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,38 +9,29 @@
 
     <TextView
         android:id="@+id/tvDialogTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextViewTitle"
         android:textColor="@color/scarpa_flow"
-        android:textSize="32sp"
-        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        tools:text="Message dialog title" />
 
     <TextView
         android:id="@+id/tvDialogMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextView"
         android:layout_marginTop="32dp"
         android:textColor="@color/scarpa_flow"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@id/tvDialogTitle"
         app:layout_constraintRight_toRightOf="@id/tvDialogTitle"
         app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
-        tools:text="@tools:sample/cities" />
+        tools:text="Message text" />
 
     <Button
         android:id="@+id/btnConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonPrimary"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@color/steel_gray"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:text="@string/confirm_button_text"
-        android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="@id/tvDialogMessage"
         app:layout_constraintRight_toRightOf="@id/tvDialogMessage"
         app:layout_constraintTop_toBottomOf="@id/tvDialogMessage" />
