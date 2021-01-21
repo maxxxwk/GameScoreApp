@@ -28,14 +28,23 @@ class MainActivity : AppCompatActivity() {
             setDefaultValueIfTimeFieldEmpty(v as EditText, hasFocus)
         }
         binding.btnConfirm.setOnClickListener {
-            if (hasEmptyField()) {
-                showEmptyFieldErrorMessageDialog()
-            } else {
-                startScoreActivity()
+            when {
+                hasEmptyField() -> {
+                    showEmptyFieldErrorMessageDialog()
+                }
+                isSameNames() -> {
+                    showSameNamesErrorMessageDialog()
+                }
+                else -> {
+                    startScoreActivity()
+                }
             }
         }
         binding.etSeconds.addTextChangedListener(getSecondsLimitTextWatcher())
     }
+
+    private fun isSameNames() =
+        binding.etFirstTeamName.text.toString() == binding.etSecondTeamName.text.toString()
 
     private fun hasEmptyField() = (binding.etFirstTeamName.text.isEmpty() ||
             binding.etSecondTeamName.text.isEmpty() ||
@@ -79,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showEmptyFieldErrorMessageDialog() {
-        val title = getString(R.string.empty_field_error_dialog_title)
+        val title = getString(R.string.incorrect_input_dialog_title)
         val message = getString(R.string.empty_field_error_dialog_message)
         val callback = object : MessageDialogCallback {
             override fun onConfirm() {
@@ -92,6 +101,21 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.empty_field_error_dialog_tag)
             )
             .commitAllowingStateLoss()
+    }
+
+    private fun showSameNamesErrorMessageDialog() {
+        val title = getString(R.string.incorrect_input_dialog_title)
+        val message = getString(R.string.same_names_error_message)
+        val callback = object : MessageDialogCallback {
+            override fun onConfirm() {
+                binding.etFirstTeamName.requestFocus()
+            }
+        }
+        supportFragmentManager.beginTransaction()
+            .add(
+                MessageDialog.newInstance(title, message, callback),
+                getString(R.string.same_names_error_dialog_tag)
+            ).commitAllowingStateLoss()
     }
 
     private fun startScoreActivity() {

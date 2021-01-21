@@ -7,7 +7,7 @@
     <string name="time_form_title">Enter the time</string>
     <string name="minutes_field_hint">Minutes</string>
     <string name="seconds_field_hint">Seconds</string>
-    <string name="empty_field_error_dialog_title">Incorrect input</string>
+    <string name="incorrect_input_dialog_title">Incorrect input</string>
     <string name="empty_field_error_dialog_message">You should fill all fields!</string>
     <string name="start_timer_button_text">Start</string>
     <string name="stop_timer_button_text">Stop</string>
@@ -35,4 +35,6 @@
     <string name="confirm_cancel_dialog_tag">CONFIRM_CANCEL_DIALOG</string>
     <string name="game_result_dialog_tag">GAME_RESULT_DIALOG</string>
     <string name="clear_winners_list_confirm_dialog_tag">CLEAR_LIST_CONFIRM_DIALOG</string>
+    <string name="same_names_error_message">Teams shouldn\'t have same names!</string>
+    <string name="same_names_error_dialog_tag">SAME_NAMES_ERROR_DIALOG</string>
 </resources>
