@@ -19,7 +19,9 @@
     <TextView
         android:id="@+id/tvWinnerTeamName"
         style="@style/TextView"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="@id/tvWinnerTitle"
         app:layout_constraintRight_toRightOf="@id/tvWinnerTitle"
@@ -38,7 +40,9 @@
     <TextView
         android:id="@+id/tvLoserTeamName"
         style="@style/TextView"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="@id/tvLoserTitle"
         app:layout_constraintRight_toRightOf="@id/tvLoserTitle"
