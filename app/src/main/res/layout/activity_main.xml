@@ -18,19 +18,15 @@
 
     <EditText
         android:id="@+id/etFirstTeamName"
+        style="@style/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
-        android:background="@color/white"
         android:hint="@string/first_team_name_field_hint"
         android:inputType="text"
         android:maxLength="32"
         android:maxLines="1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@id/tvTeamsNamesFormTitle"
         app:layout_constraintRight_toRightOf="@id/tvTeamsNamesFormTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTeamsNamesFormTitle" />
@@ -38,19 +34,15 @@
 
     <EditText
         android:id="@+id/etSecondTeamName"
+        style="@style/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
-        android:background="@color/white"
         android:hint="@string/second_team_name_field_hint"
         android:inputType="text"
         android:maxLength="32"
         android:maxLines="1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@id/etFirstTeamName"
         app:layout_constraintRight_toRightOf="@id/etFirstTeamName"
         app:layout_constraintTop_toBottomOf="@id/etFirstTeamName" />
@@ -66,40 +58,34 @@
 
     <EditText
         android:id="@+id/etMinutes"
+        style="@style/EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
-        android:background="@color/white"
         android:digits="0123456789"
         android:hint="@string/minutes_field_hint"
         android:inputType="number"
         android:maxLength="3"
         android:maxLines="1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:textAlignment="viewEnd"
-        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="@id/tvTimeFormTitle"
         app:layout_constraintRight_toLeftOf="@id/etSeconds"
         app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
 
     <EditText
         android:id="@+id/etSeconds"
+        style="@style/EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
-        android:background="@color/white"
         android:digits="0123456789"
         android:hint="@string/seconds_field_hint"
         android:inputType="number"
         android:maxLength="2"
         android:maxLines="1"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:textAlignment="viewEnd"
-        android:textColor="@color/black"
         app:layout_constraintLeft_toRightOf="@id/etMinutes"
         app:layout_constraintRight_toRightOf="@id/tvTimeFormTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTimeFormTitle" />
@@ -113,7 +99,7 @@
 
     <Button
         android:id="@+id/btnConfirm"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:text="@string/confirm_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/etMinutes"

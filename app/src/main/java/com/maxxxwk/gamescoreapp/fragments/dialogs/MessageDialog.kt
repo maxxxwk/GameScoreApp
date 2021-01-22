@@ -15,13 +15,13 @@ class MessageDialog : DialogFragment() {
     private lateinit var message: String
 
     companion object {
-        fun newInstance(title: String, message: String, callback: MessageDialogCallback): MessageDialog {
-            val instance = MessageDialog()
-            instance.title = title
-            instance.message = message
-            instance.messageDialogCallback = callback
-            return instance
-        }
+        fun newInstance(title: String, message: String, callback: MessageDialogCallback) =
+            MessageDialog().apply {
+                this.title = title
+                this.message = message
+                this.messageDialogCallback = callback
+            }
+
     }
 
     override fun onCreateView(

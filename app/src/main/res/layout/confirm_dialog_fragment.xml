@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/champagne"
     android:padding="32dp">
@@ -31,7 +31,7 @@
 
     <Button
         android:id="@+id/btnPositive"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
         android:text="@string/positive_button_text"
@@ -41,7 +41,7 @@
 
     <Button
         android:id="@+id/btnNegative"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
         android:text="@string/negative_button_text"

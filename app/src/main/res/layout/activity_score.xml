@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/btnStartTimer"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:text="@string/start_timer_button_text"
         app:layout_constraintLeft_toLeftOf="@id/tvTimer"
@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/btnStopTimer"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:text="@string/stop_timer_button_text"
         app:layout_constraintLeft_toRightOf="@id/btnStartTimer"
@@ -66,7 +66,7 @@
 
     <Button
         android:id="@+id/btnFirstTeamScoreIncrement"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:text="@string/score_increment_button_text"
         app:layout_constraintLeft_toLeftOf="@id/tvFirstTeamScore"
@@ -75,7 +75,7 @@
 
     <Button
         android:id="@+id/btnFirstTeamScoreDecrement"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:text="@string/score_decrement_button_text"
         app:layout_constraintLeft_toRightOf="@id/btnFirstTeamScoreIncrement"
@@ -113,7 +113,7 @@
 
     <Button
         android:id="@+id/btnSecondTeamScoreIncrement"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:text="@string/score_increment_button_text"
         app:layout_constraintLeft_toLeftOf="@id/tvSecondTeamScore"
@@ -122,7 +122,7 @@
 
     <Button
         android:id="@+id/btnSecondTeamScoreDecrement"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:layout_marginHorizontal="8dp"
         android:text="@string/score_decrement_button_text"
         app:layout_constraintLeft_toRightOf="@id/btnSecondTeamScoreIncrement"
@@ -138,7 +138,7 @@
 
     <Button
         android:id="@+id/btnCancel"
-        style="@style/ButtonPrimary"
+        style="@style/Button"
         android:text="@string/cancel_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

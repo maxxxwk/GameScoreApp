@@ -35,6 +35,24 @@
     <string name="confirm_cancel_dialog_tag">CONFIRM_CANCEL_DIALOG</string>
     <string name="game_result_dialog_tag">GAME_RESULT_DIALOG</string>
     <string name="clear_winners_list_confirm_dialog_tag">CLEAR_LIST_CONFIRM_DIALOG</string>
-    <string name="same_names_error_message">Teams shouldn\'t have same names!</string>
+    <string name="same_names_error_message">Teams shouldn`t have same names!</string>
     <string name="same_names_error_dialog_tag">SAME_NAMES_ERROR_DIALOG</string>
+    <string name="share_result_text">
+        Winner: %1$s\n
+        Loser: %2$s\n
+        Score: %3$d:%4$d\n
+    </string>
+    <string name="share_draw_result_text">
+        First team: %1$s\n
+        Second team: %2$s\n
+        Score: %3$d:%4$d\n
+    </string>
+    <string name="share_intent_chooser_text">Choose email client</string>
+    <string name="score_delimiter">:</string>
+    <string name="share_result_confirm_dialog_title">Confirm sending</string>
+    <string name="share_result_confirm_dialog_question">Do you really want to share result?</string>
+    <string name="share_result_confirm_dialog_tag">SHARE_RESULT_CONFIRM_DIALOG</string>
+    <string name="share_button_text">Share result</string>
+    <string name="share_draw_result_confirm_dialog_title">Confirm sending</string>
+    <string name="share_draw_result_confirm_dialog_question">Do you want to share result?</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.ConfirmDialogCallback
 import com.maxxxwk.gamescoreapp.callbacks.MessageDialogCallback
@@ -139,7 +138,7 @@ class ScoreActivity : AppCompatActivity() {
                     val message = getString(R.string.draw_result_dialog_message)
                     val callback = object : MessageDialogCallback {
                         override fun onConfirm() {
-                            finish()
+                            showConfirmShareResultDialog()
                         }
                     }
                     showGameResultDialog(message, callback)
@@ -194,6 +193,45 @@ class ScoreActivity : AppCompatActivity() {
             .add(
                 ConfirmDialog.newInstance(title, question, callback),
                 getString(R.string.confirm_cancel_dialog_tag)
+            )
+            .commitAllowingStateLoss()
+    }
+
+    private fun showConfirmShareResultDialog() {
+        val title = getString(R.string.share_draw_result_confirm_dialog_title)
+        val question = getString(R.string.share_draw_result_confirm_dialog_question)
+        val callback = object : ConfirmDialogCallback {
+            override fun onPositiveAnswer() {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(
+                        Intent.EXTRA_TEXT, getString(
+                            R.string.share_draw_result_text,
+                            firstTeam.name,
+                            secondTeam.name,
+                            firstTeam.score,
+                            secondTeam.score
+                        )
+                    )
+                }
+                startActivity(
+                    Intent.createChooser(
+                        intent,
+                        getString(R.string.share_intent_chooser_text)
+                    )
+                )
+                finish()
+            }
+
+            override fun onNegativeAnswer() {
+                finish()
+            }
+        }
+        supportFragmentManager.beginTransaction()
+            .add(
+                ConfirmDialog.newInstance(title, question, callback),
+                getString(R.string.share_result_confirm_dialog_tag)
             )
             .commitAllowingStateLoss()
     }

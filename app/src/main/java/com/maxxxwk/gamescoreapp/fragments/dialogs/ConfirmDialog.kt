@@ -20,13 +20,12 @@ class ConfirmDialog : DialogFragment() {
             title: String,
             question: String,
             callback: ConfirmDialogCallback
-        ): ConfirmDialog {
-            val instance = ConfirmDialog()
-            instance.confirmDialogCallback = callback
-            instance.title = title
-            instance.question = question
-            return instance
+        ) = ConfirmDialog().apply {
+            this.confirmDialogCallback = callback
+            this.title = title
+            this.question = question
         }
+
     }
 
     override fun onCreateView(
