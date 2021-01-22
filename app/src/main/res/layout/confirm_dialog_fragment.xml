@@ -24,8 +24,8 @@
         android:textAlignment="center"
         android:textColor="@color/scarpa_flow"
         android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@id/tvDialogTitle"
-        app:layout_constraintRight_toRightOf="@id/tvDialogTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
         tools:text="Confirm question" />
 
@@ -35,6 +35,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
         android:text="@string/positive_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/tvDialogQuestion"
         app:layout_constraintRight_toLeftOf="@id/btnNegative"
         app:layout_constraintTop_toBottomOf="@id/tvDialogQuestion" />
@@ -45,6 +46,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="32dp"
         android:text="@string/negative_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/btnPositive"
         app:layout_constraintRight_toRightOf="@id/tvDialogQuestion"
         app:layout_constraintTop_toBottomOf="@id/tvDialogQuestion" />

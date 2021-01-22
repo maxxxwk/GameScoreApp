@@ -33,8 +33,8 @@
         style="@style/TextViewTitle"
         android:layout_marginTop="48dp"
         android:text="@string/loser_title"
-        app:layout_constraintLeft_toLeftOf="@id/tvWinnerTeamName"
-        app:layout_constraintRight_toRightOf="@id/tvWinnerTeamName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvWinnerTeamName" />
 
     <TextView
@@ -55,8 +55,8 @@
         android:layout_marginTop="48dp"
         android:text="@string/game_score_title"
         android:textSize="40sp"
-        app:layout_constraintLeft_toLeftOf="@id/tvLoserTeamName"
-        app:layout_constraintRight_toRightOf="@id/tvLoserTeamName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLoserTeamName" />
 
     <TextView

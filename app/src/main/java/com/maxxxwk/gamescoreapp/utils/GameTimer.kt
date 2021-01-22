@@ -16,17 +16,6 @@ class GameTimer(
         updateTimerState()
     }
 
-    fun startTimer() {
-        setupCountDownTimer()
-        if (minutes != 0 || seconds != 0) {
-            countDownTimer.start()
-        }
-    }
-
-    fun stopTimer() {
-        countDownTimer.cancel()
-    }
-
     private fun updateTimerState() {
         timerView.text = when {
             minutes < 10 && seconds < 10 -> "0$minutes:0$seconds"
@@ -53,5 +42,16 @@ class GameTimer(
                 callback.onFinish()
             }
         }
+    }
+
+    fun startTimer() {
+        setupCountDownTimer()
+        if (minutes != 0 || seconds != 0) {
+            countDownTimer.start()
+        }
+    }
+
+    fun stopTimer() {
+        countDownTimer.cancel()
     }
 }

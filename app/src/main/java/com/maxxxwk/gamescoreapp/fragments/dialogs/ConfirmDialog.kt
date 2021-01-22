@@ -11,7 +11,7 @@ import com.maxxxwk.gamescoreapp.databinding.ConfirmDialogFragmentBinding
 class ConfirmDialog : DialogFragment() {
 
     private lateinit var binding: ConfirmDialogFragmentBinding
-    private lateinit var confirmDialogCallback: ConfirmDialogCallback
+    private lateinit var callback: ConfirmDialogCallback
     private lateinit var title: String
     private lateinit var question: String
 
@@ -21,18 +21,17 @@ class ConfirmDialog : DialogFragment() {
             question: String,
             callback: ConfirmDialogCallback
         ) = ConfirmDialog().apply {
-            this.confirmDialogCallback = callback
+            this.callback = callback
             this.title = title
             this.question = question
         }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ConfirmDialogFragmentBinding.inflate(layoutInflater, container, false)
         putDataFromIntentToView()
         setupListeners()
@@ -46,11 +45,11 @@ class ConfirmDialog : DialogFragment() {
 
     private fun setupListeners() {
         binding.btnPositive.setOnClickListener {
-            confirmDialogCallback.onPositiveAnswer()
+            callback.onPositiveAnswer()
             dismiss()
         }
         binding.btnNegative.setOnClickListener {
-            confirmDialogCallback.onNegativeAnswer()
+            callback.onNegativeAnswer()
             dismiss()
         }
     }

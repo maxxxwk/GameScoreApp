@@ -39,8 +39,7 @@ class WinnersListActivity : AppCompatActivity() {
         }
 
         fun start(context: Context) {
-            val intent = Intent(context, WinnersListActivity::class.java)
-            context.startActivity(intent)
+            context.startActivity(Intent(context, WinnersListActivity::class.java))
         }
     }
 
@@ -98,7 +97,7 @@ class WinnersListActivity : AppCompatActivity() {
 
     private fun showClearConfirmDialog() {
         val title = getString(R.string.confirm_dialog_title)
-        val question = getString(R.string.confirm_clear_dialog_message)
+        val question = getString(R.string.confirm_clear_dialog_question)
         val callback = object : ConfirmDialogCallback {
             override fun onPositiveAnswer() {
                 clearWinnersList()

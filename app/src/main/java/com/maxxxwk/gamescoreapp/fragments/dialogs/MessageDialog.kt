@@ -10,7 +10,7 @@ import com.maxxxwk.gamescoreapp.databinding.MessageDialogFragmentBinding
 
 class MessageDialog : DialogFragment() {
     private lateinit var binding: MessageDialogFragmentBinding
-    private lateinit var messageDialogCallback: MessageDialogCallback
+    private lateinit var callback: MessageDialogCallback
     private lateinit var title: String
     private lateinit var message: String
 
@@ -19,7 +19,7 @@ class MessageDialog : DialogFragment() {
             MessageDialog().apply {
                 this.title = title
                 this.message = message
-                this.messageDialogCallback = callback
+                this.callback = callback
             }
 
     }
@@ -28,22 +28,22 @@ class MessageDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = MessageDialogFragmentBinding.inflate(layoutInflater, container, false)
         putDataFromIntentToView()
         setupListeners()
         return binding.root
     }
 
-    private fun setupListeners() {
-        binding.btnConfirm.setOnClickListener {
-            messageDialogCallback.onConfirm()
-            dismiss()
-        }
-    }
-
     private fun putDataFromIntentToView() {
         binding.tvDialogTitle.text = title
         binding.tvDialogMessage.text = message
+    }
+
+    private fun setupListeners() {
+        binding.btnConfirm.setOnClickListener {
+            callback.onConfirm()
+            dismiss()
+        }
     }
 }

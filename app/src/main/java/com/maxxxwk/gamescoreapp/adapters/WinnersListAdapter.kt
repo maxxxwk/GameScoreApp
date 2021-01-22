@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.maxxxwk.gamescoreapp.R
 import com.maxxxwk.gamescoreapp.callbacks.WinnerItemDiffCallback
 import com.maxxxwk.gamescoreapp.databinding.WinnerListItemBinding
 import com.maxxxwk.gamescoreapp.models.Team
@@ -15,7 +16,8 @@ class WinnersListAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(winner: Team) {
             binding.tvWinner.text = winner.name
-            binding.tvScore.text = "Score: ${winner.score}"
+            binding.tvScore.text =
+                binding.root.context.getString(R.string.winners_list_item_score_text, winner.score)
         }
     }
 

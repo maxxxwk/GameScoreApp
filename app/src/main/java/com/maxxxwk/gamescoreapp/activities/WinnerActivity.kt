@@ -27,10 +27,10 @@ class WinnerActivity : AppCompatActivity() {
         private const val LOSER_KEY = "LOSER_KEY"
 
         fun start(context: Context, winner: Team, loser: Team) {
-            val intent = Intent(context, WinnerActivity::class.java)
-            intent.putExtra(WINNER_KEY, winner)
-            intent.putExtra(LOSER_KEY, loser)
-            context.startActivity(intent)
+            context.startActivity(Intent(context, WinnerActivity::class.java).apply {
+                putExtra(WINNER_KEY, winner)
+                putExtra(LOSER_KEY, loser)
+            })
         }
     }
 
@@ -40,6 +40,25 @@ class WinnerActivity : AppCompatActivity() {
         pullDataFromIntent()
         updateViews()
         setupListeners()
+    }
+
+    private fun pullDataFromIntent() {
+        winner = intent.getParcelableExtra(WINNER_KEY)
+        loser = intent.getParcelableExtra(LOSER_KEY)
+    }
+
+    private fun updateViews() {
+        val gameScore = StringBuilder()
+        winner?.let {
+            binding.tvWinnerTeamName.text = it.name
+            gameScore.append(it.score)
+            gameScore.append(getString(R.string.score_delimiter))
+        }
+        loser?.let {
+            binding.tvLoserTeamName.text = it.name
+            gameScore.append(it.score)
+            binding.tvGameScore.text = gameScore.toString()
+        }
     }
 
     private fun setupListeners() {
@@ -54,8 +73,13 @@ class WinnerActivity : AppCompatActivity() {
         }
     }
 
+    private fun showWinnersList() {
+        WinnersListActivity.start(this)
+        finish()
+    }
+
     private fun showShareConfirmDialog() {
-        val title = getString(R.string.share_result_confirm_dialog_title)
+        val title = getString(R.string.confirm_dialog_title)
         val question = getString(R.string.share_result_confirm_dialog_question)
         val callback = object : ConfirmDialogCallback {
             override fun onPositiveAnswer() {
@@ -88,29 +112,5 @@ class WinnerActivity : AppCompatActivity() {
                 getString(R.string.share_result_confirm_dialog_tag)
             )
             .commitAllowingStateLoss()
-    }
-
-    private fun showWinnersList() {
-        WinnersListActivity.start(this)
-        finish()
-    }
-
-    private fun pullDataFromIntent() {
-        winner = intent.getParcelableExtra(WINNER_KEY)
-        loser = intent.getParcelableExtra(LOSER_KEY)
-    }
-
-    private fun updateViews() {
-        val gameScore = StringBuilder()
-        winner?.let {
-            binding.tvWinnerTeamName.text = it.name
-            gameScore.append(it.score)
-            gameScore.append(getString(R.string.score_delimiter))
-        }
-        loser?.let {
-            binding.tvLoserTeamName.text = it.name
-            gameScore.append(it.score)
-            binding.tvGameScore.text = gameScore.toString()
-        }
     }
 }

@@ -35,12 +35,12 @@ class ScoreActivity : AppCompatActivity() {
             minutes: Int,
             seconds: Int
         ) {
-            val intent = Intent(context, ScoreActivity::class.java)
-            intent.putExtra(FIRST_TEAM_NAME_KEY, firstTeamName)
-            intent.putExtra(SECOND_TEAM_NAME_KEY, secondTeamName)
-            intent.putExtra(MINUTES_KEY, minutes)
-            intent.putExtra(SECONDS_KEY, seconds)
-            context.startActivity(intent)
+            context.startActivity(Intent(context, ScoreActivity::class.java).apply {
+                putExtra(FIRST_TEAM_NAME_KEY, firstTeamName)
+                putExtra(SECOND_TEAM_NAME_KEY, secondTeamName)
+                putExtra(MINUTES_KEY, minutes)
+                putExtra(SECONDS_KEY, seconds)
+            })
         }
     }
 
@@ -50,6 +50,67 @@ class ScoreActivity : AppCompatActivity() {
         initTeams()
         setupGameTimer()
         setupListeners()
+    }
+
+    private fun initTeams() {
+        firstTeam = Team(
+            intent.getStringExtra(FIRST_TEAM_NAME_KEY).toString(),
+            0
+        )
+        secondTeam = Team(
+            intent.getStringExtra(SECOND_TEAM_NAME_KEY).toString(),
+            0
+        )
+        binding.tvFirstTeamName.text = firstTeam.name
+        binding.tvFirstTeamScore.text = firstTeam.score.toString()
+        binding.tvSecondTeamName.text = secondTeam.name
+        binding.tvSecondTeamScore.text = secondTeam.score.toString()
+    }
+
+    private fun setupGameTimer() {
+        val minutes = intent.getIntExtra(MINUTES_KEY, 0)
+        val seconds = intent.getIntExtra(SECONDS_KEY, 0)
+        gameTimer = GameTimer(
+            minutes,
+            seconds,
+            binding.tvTimer,
+            object : TimerCallback {
+                override fun onFinish() {
+                    onTimerFinish()
+                }
+            }
+        )
+    }
+
+    private fun onTimerFinish() {
+        GameResultChecker(firstTeam, secondTeam).apply {
+            when {
+                isDraw -> {
+                    val message = getString(R.string.draw_result_dialog_message)
+                    val callback = object : MessageDialogCallback {
+                        override fun onConfirm() {
+                            showConfirmShareResultDialog()
+                        }
+                    }
+                    showGameResultDialog(message, callback)
+                }
+                else -> {
+                    winner?.let { winner ->
+                        WinnersListActivity.addNewWinner(winner)
+                        loser?.let { loser ->
+                            val message = "${winner.name} is winner!"
+                            val callback = object : MessageDialogCallback {
+                                override fun onConfirm() {
+                                    WinnerActivity.start(this@ScoreActivity, winner, loser)
+                                    finish()
+                                }
+                            }
+                            showGameResultDialog(message, callback)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -76,36 +137,6 @@ class ScoreActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupGameTimer() {
-        val minutes = intent.getIntExtra(MINUTES_KEY, 0)
-        val seconds = intent.getIntExtra(SECONDS_KEY, 0)
-        gameTimer = GameTimer(
-            minutes,
-            seconds,
-            binding.tvTimer,
-            object : TimerCallback {
-                override fun onFinish() {
-                    onTimerFinish()
-                }
-            }
-        )
-    }
-
-    private fun initTeams() {
-        firstTeam = Team(
-            intent.getStringExtra(FIRST_TEAM_NAME_KEY).toString(),
-            0
-        )
-        secondTeam = Team(
-            intent.getStringExtra(SECOND_TEAM_NAME_KEY).toString(),
-            0
-        )
-        binding.tvFirstTeamName.text = firstTeam.name
-        binding.tvFirstTeamScore.text = firstTeam.score.toString()
-        binding.tvSecondTeamName.text = secondTeam.name
-        binding.tvSecondTeamScore.text = secondTeam.score.toString()
-    }
-
     private fun incrementScore(team: Team) {
         if (team.score != Int.MAX_VALUE) {
             team.score += 1
@@ -127,37 +158,6 @@ class ScoreActivity : AppCompatActivity() {
             }
             else -> {
                 binding.tvSecondTeamScore.text = team.score.toString()
-            }
-        }
-    }
-
-    private fun onTimerFinish() {
-        GameResultChecker(firstTeam, secondTeam).apply {
-            when {
-                isDraw -> {
-                    val message = getString(R.string.draw_result_dialog_message)
-                    val callback = object : MessageDialogCallback {
-                        override fun onConfirm() {
-                            showConfirmShareResultDialog()
-                        }
-                    }
-                    showGameResultDialog(message, callback)
-                }
-                else -> {
-                    winner?.let { winner ->
-                        WinnersListActivity.addNewWinner(winner)
-                        val message = "${winner.name} is winner!"
-                        loser?.let { loser ->
-                            val callback = object : MessageDialogCallback {
-                                override fun onConfirm() {
-                                    WinnerActivity.start(this@ScoreActivity, winner, loser)
-                                    finish()
-                                }
-                            }
-                            showGameResultDialog(message, callback)
-                        }
-                    }
-                }
             }
         }
     }
@@ -198,7 +198,7 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun showConfirmShareResultDialog() {
-        val title = getString(R.string.share_draw_result_confirm_dialog_title)
+        val title = getString(R.string.confirm_dialog_title)
         val question = getString(R.string.share_draw_result_confirm_dialog_question)
         val callback = object : ConfirmDialogCallback {
             override fun onPositiveAnswer() {
