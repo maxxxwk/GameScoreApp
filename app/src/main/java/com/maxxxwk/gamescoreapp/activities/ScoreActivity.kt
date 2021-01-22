@@ -131,9 +131,13 @@ class ScoreActivity : AppCompatActivity() {
         }
         binding.btnStartTimer.setOnClickListener {
             gameTimer.startTimer()
+            binding.btnStartTimer.isEnabled = false
+            binding.btnStopTimer.isEnabled = true
         }
         binding.btnStopTimer.setOnClickListener {
             gameTimer.stopTimer()
+            binding.btnStopTimer.isEnabled = false
+            binding.btnStartTimer.isEnabled = true
         }
     }
 
