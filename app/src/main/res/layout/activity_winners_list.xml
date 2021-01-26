@@ -10,10 +10,10 @@
     <TextView
         android:id="@+id/tvEmptyWinnersListMessage"
         style="@style/TextView"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="@dimen/empty_winners_list_message_text_view_paddingHorizontal"
         android:text="@string/empty_winners_list_message"
         android:textAlignment="center"
-        android:textSize="32sp"
+        android:textSize="@dimen/empty_winners_list_message_text_view_textSize"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/tvWinnersListTitle"
         style="@style/TextViewTitle"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/title_text_view_marginTop"
         android:text="@string/winners_list_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/rvWinnersList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/winners_list_recycler_view_marginTop"
         app:layout_constraintBottom_toTopOf="@id/barrier"
         app:layout_constraintLeft_toLeftOf="@id/tvWinnersListTitle"
         app:layout_constraintRight_toRightOf="@id/tvWinnersListTitle"
@@ -45,13 +45,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:barrierMargin="-16dp"
         app:constraint_referenced_ids="btnClear, btnBack" />
 
     <Button
         android:id="@+id/btnClear"
         style="@style/Button"
-        android:layout_marginVertical="16dp"
+        android:layout_marginVertical="@dimen/clear_button_marginVertical"
         android:text="@string/clear_list_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +60,7 @@
     <Button
         android:id="@+id/btnBack"
         style="@style/Button"
-        android:layout_marginVertical="16dp"
+        android:layout_marginVertical="@dimen/back_button_marginVertical"
         android:text="@string/back_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
